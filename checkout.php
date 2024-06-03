@@ -20,7 +20,7 @@ if(isset($_POST['order_btn'])){
    $placed_on = date('d M Y');
 
    $cart_total = 0;
-   $cart_products[] = '';
+   $cart_products = array(); // Initialize as array
 
    $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
    if(mysqli_num_rows($cart_query) > 0){
@@ -33,7 +33,11 @@ if(isset($_POST['order_btn'])){
 
    $total_products = implode(', ',$cart_products);
 
-   $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$cart_total'") or die('query failed');
+   // Add the shipping fee to the cart total
+   $shipping_fee = 10.00;
+   $grand_total = $cart_total + $shipping_fee;
+
+   $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$grand_total'") or die('query failed');
 
    if($cart_total == 0){
       $message[] = 'your cart is empty';
@@ -41,7 +45,7 @@ if(isset($_POST['order_btn'])){
       if(mysqli_num_rows($order_query) > 0){
          $message[] = 'Order already placed!'; 
       }else{
-         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$cart_total', '$placed_on')") or die('query failed');
+         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$grand_total', '$placed_on')") or die('query failed');
          $message[] = 'Order placed successfully!';
          mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
       }
@@ -72,7 +76,6 @@ if(isset($_POST['order_btn'])){
 
 <div class="heading">
    <h3>Checkout</h3>
-
 </div>
 
 <section class="display-order">
@@ -92,7 +95,7 @@ if(isset($_POST['order_btn'])){
       echo '<p class="empty">Your cart is empty</p>';
    }
    ?>
-   <div class="grand-total"> Grand Total : <span>RM <?php echo $grand_total; ?></span> </div>
+   <div class="grand-total"> Grand Total : <span>RM <?php echo $grand_total + 10; // Add the shipping fee to the displayed grand total ?></span> </div>
 
 </section>
 
@@ -149,14 +152,6 @@ if(isset($_POST['order_btn'])){
    </form>
 
 </section>
-
-
-
-
-
-
-
-
 
 <?php include 'footer.php'; ?>
 
