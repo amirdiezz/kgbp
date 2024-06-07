@@ -60,7 +60,7 @@ if(isset($_POST['add_to_cart'])){
       <img src="media/banner2.jpg" class="d-block w-100" alt="...">
     </div>
     <div class="carousel-item">
-      <img src="media/banner1.jpg" class="d-block w-100" alt="...">
+      <img src="media/banner3.jpg" class="d-block w-100" alt="...">
     </div>
   </div>
   <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">

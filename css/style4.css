@@ -333,6 +333,7 @@ section{
    width: 30rem;
    display: none;
    animation: fadeIn .2s linear;
+   z-index: 9999;
 }
 
 .header .header-2 .flex .user-box.active{
@@ -416,6 +417,10 @@ section{
    text-align: center;
    border:var(--border);
    position: relative;
+}
+
+.products .box-container .box:hover{
+   transform: scale(1.03);
 }
 
 .products .box-container .box .image{
