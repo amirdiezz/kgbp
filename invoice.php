@@ -93,6 +93,7 @@ $cart_total = 0; // Initialize cart total
                <td>
                   <p><strong><?php echo $order['name']; ?></strong></p>
                   <p><?php echo $order['number']; ?></p>
+                  <p><?php echo $order['email']; ?></p>
                   <p><?php echo $order['address']; ?></p><br>
                   <p><strong>Placed On:</strong> <?php echo $order['placed_on']; ?></p>
                   <p><strong>Order ID:</strong> <?php echo $order['id']; ?></p>

@@ -57,16 +57,16 @@ if(!isset($admin_id)){
 
       <div class="box">
          <?php
-            $total_completed = 0;
-            $select_completed = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'completed'") or die('query failed');
-            if(mysqli_num_rows($select_completed) > 0){
-               while($fetch_completed = mysqli_fetch_assoc($select_completed)){
-                  $total_price = $fetch_completed['total_price'];
-                  $total_completed += $total_price;
+            $total_shipped = 0;
+            $select_shipped = mysqli_query($conn, "SELECT total_price FROM `orders` WHERE payment_status = 'Shipped'") or die('query failed');
+            if(mysqli_num_rows($select_shipped) > 0){
+               while($fetch_shipped = mysqli_fetch_assoc($select_shipped)){
+                  $total_price = $fetch_shipped['total_price'];
+                  $total_shipped += $total_price;
                };
             };
          ?>
-         <h3>RM <?php echo $total_completed; ?></h3>
+         <h3>RM <?php echo $total_shipped; ?></h3>
          <p>Revenue</p>
       </div>
 

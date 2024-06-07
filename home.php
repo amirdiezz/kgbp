@@ -50,8 +50,29 @@ if(isset($_POST['add_to_cart'])){
    
 <?php include 'header.php'; ?>
 
-<section class="home">
-</section>
+<div class="scoped-bootstrap">
+<div id="carouselExampleAutoplaying" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="media/banner1.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="media/banner2.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="media/banner1.jpg" class="d-block w-100" alt="...">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleAutoplaying" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+</div>
 
 <section class="products">
 
@@ -124,6 +145,38 @@ if(isset($_POST['add_to_cart'])){
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
+<script>
+   (function() {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css';
+      link.integrity = 'sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH';
+      link.crossOrigin = 'anonymous';
+      
+      link.onload = function() {
+         var scopedClass = 'scoped-bootstrap';
+         var styleSheets = document.styleSheets;
+         for (var i = 0; i < styleSheets.length; i++) {
+            if (styleSheets[i].href === link.href) {
+               var rules = styleSheets[i].cssRules || styleSheets[i].rules;
+               var scopedStyles = '';
+               for (var j = 0; j < rules.length; j++) {
+                  scopedStyles += `.${scopedClass} ${rules[j].cssText}`;
+               }
+               var style = document.createElement('style');
+               style.appendChild(document.createTextNode(scopedStyles));
+               document.head.appendChild(style);
+               document.head.removeChild(link);
+               break;
+            }
+         }
+      };
+      
+      document.head.appendChild(link);
+   })();
+</script>
 
 </body>
 </html>
