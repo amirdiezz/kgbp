@@ -78,9 +78,8 @@ $cart_total = 0; // Initialize cart total
    }
 </style>
 
-
 </head>
-<body>
+<body onload="window.print()">
 
 <section class="invoice">
     <img height="50rem" src="media/biglogo.png">
