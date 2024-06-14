@@ -632,42 +632,69 @@ section{
    color:var(--black);
 }
 
-.edit-profile .box-container{
-   max-width: 1700px;
-   margin:0 auto;
-   display:flex;
+.edit-profile .box-container {
+   max-width: 50rem; /* Adjust to match .contact form max-width */
+   margin: 0 auto;
+   display: flex;
    flex-wrap: wrap;
    align-items: center;
-   gap:1.5rem;
+   gap: 1.5rem;
 }
 
-.edit-profile .box-container .empty{
-   flex:1;
+.edit-profile .box-container .empty {
+   flex: 1;
 }
 
-.edit-profile .box-container .box{
-   flex:1 1 40rem;
+.edit-profile .box-container .box {
+   flex: 1 1 100%; /* Ensure the box takes full width */
    border-radius: .5rem;
-   padding:2rem;
-   border:var(--border);
+   padding: 2rem;
+   border: var(--border);
    background-color: var(--light-bg);
-   padding:1rem 2rem;
+   padding: 2rem; /* Adjust padding for consistency */
    text-align: center;
-   width: 80rem;;
+   max-width: 50rem; /* Adjust to match .contact form max-width */
+   margin: 0 auto; /* Center the box */
 }
 
 .edit-profile .box-container .box input[type="text"],
 .edit-profile .box-container .box input[type="email"],
 .edit-profile .box-container .box input[type="number"] {
    background-color: var(--white);
+   width: 100%; /* Ensure inputs take full width */
+   border: var(--border); /* Match input border style */
+   padding: 1.2rem 1.4rem; /* Adjust padding for consistency */
+   font-size: 1.8rem; /* Adjust font size for consistency */
+   color: var(--black); /* Adjust font color for consistency */
+   border-radius: .5rem; /* Ensure border radius matches */
 }
 
-
-.edit-profile .box-container .box p{
-   padding:1rem 0;
+.edit-profile .box-container .box p {
+   padding: 1rem 0;
    font-size: 2rem;
-   color:var(--black);
+   color: var(--black);
 }
+
+/* Additional styling for consistency */
+.edit-profile .box-container .box h3 {
+   font-size: 2.5rem;
+   text-transform: uppercase;
+   margin-bottom: 1rem;
+   color: var(--black);
+}
+
+.edit-profile .box-container .box textarea.box {
+   resize: none; /* Disable resizing */
+   width: 100%; /* Ensure it takes full width */
+   height: auto; /* Allow the textarea to expand based on content */
+   border: var(--border); /* Match input border style */
+   padding: 1.2rem 1.4rem; /* Adjust padding for consistency */
+   font-size: 1.8rem; /* Adjust font size for consistency */
+   color: var(--black); /* Adjust font color for consistency */
+   border-radius: .5rem; /* Ensure border radius matches */
+   margin-top: 1rem; /* Adjust margin as needed */
+}
+
 
 .shopping-cart .box-container{
    max-width: 1700px;
@@ -888,6 +915,7 @@ section{
 .table-container {
    max-width: 1700px;
    margin: 0 auto;
+   overflow-x: auto;
 }
 
 table {
@@ -1024,6 +1052,8 @@ table th {
 
    .header .header-2 .flex .navbar.active{
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+      position: absolute;
+      z-index: 1000;
    }
 
    .header .header-2 .flex .navbar a{

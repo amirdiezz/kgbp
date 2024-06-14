@@ -79,7 +79,7 @@ if (mysqli_num_rows($select_profile) > 0) {
             <p>Phone Number</p>
             <input type="text" name="update_number" class="box" placeholder="Enter your number" value="<?php echo $fetch_profile['number']; ?>" required><br>
             <p>Address</p>
-            <input type="text" name="update_address" class="box" placeholder="Enter your address" value="<?php echo $fetch_profile['address']; ?>"><br>
+            <textarea name="update_address" class="box" placeholder="Enter your address" rows="5" cols="30"><?php echo $fetch_profile['address']; ?></textarea><br>
             <input type="submit" value="Update Profile" name="update_profile" class="btn">
         </form>
     </div>
