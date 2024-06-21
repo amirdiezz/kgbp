@@ -37,36 +37,23 @@ if(isset($_POST['order_btn'])){
    $shipping_fee = 10.00;
    $grand_total = $cart_total + $shipping_fee;
 
-   $order_query = mysqli_query($conn, "SELECT * FROM `orders` WHERE name = '$name' AND number = '$number' AND email = '$email' AND method = '$method' AND address = '$address' AND total_products = '$total_products' AND total_price = '$grand_total'") or die('query failed');
+   // Store order details in session to retrieve in stripe.php
+   $_SESSION['order_details'] = [
+      'user_id' => $user_id,
+      'name' => $name,
+      'number' => $number,
+      'email' => $email,
+      'method' => $method,
+      'address' => $address,
+      'total_products' => $total_products,
+      'grand_total' => $grand_total,
+      'placed_on' => $placed_on,
+   ];
 
-   if($cart_total == 0){
-      $message[] = 'your cart is empty';
-   }else{
-      if(mysqli_num_rows($order_query) > 0){
-         $message[] = 'Order already placed!'; 
-      }else{
-         mysqli_query($conn, "INSERT INTO `orders`(user_id, name, number, email, method, address, total_products, total_price, placed_on) VALUES('$user_id', '$name', '$number', '$email', '$method', '$address', '$total_products', '$grand_total', '$placed_on')") or die('query failed');
-         $message[] = 'Order placed successfully!';
-         
-         // Update product stocks in the `products` table
-         $cart_query = mysqli_query($conn, "SELECT * FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-         if(mysqli_num_rows($cart_query) > 0){
-            while($cart_item = mysqli_fetch_assoc($cart_query)){
-               $product_name = $cart_item['name'];
-               $product_quantity = $cart_item['quantity'];
-
-               // Subtract the purchased quantity from the product stocks
-               mysqli_query($conn, "UPDATE `products` SET stocks = stocks - $product_quantity WHERE name = '$product_name'") or die('query failed');
-            }
-         }
-
-         // Clear the cart after order is placed
-         mysqli_query($conn, "DELETE FROM `cart` WHERE user_id = '$user_id'") or die('query failed');
-      }
-   }
-   
+   // Redirect to stripe.php for payment processing
+   header('Location: stripe.php');
+   exit();
 }
-
 ?>
 
 <!DOCTYPE html>
